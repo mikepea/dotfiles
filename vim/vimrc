@@ -1,5 +1,9 @@
+" pathogen woo
+execute pathogen#infect()
+
 " Forget being compatible with good ol' vi
 set nocompatible
+
 
 " Get that filetype stuff happening
 filetype on
@@ -32,3 +36,10 @@ nmap <silent> ,sv :so $MYVIMRC<cr>
 
 set modelines=5
 set modeline
+
+" sensible indenting defaults for what i do
+set ts=2
+set sw=2
+set et
+set autoindent
+
