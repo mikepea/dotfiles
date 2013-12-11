@@ -7,4 +7,5 @@ mkdir  -p ~/.vim
 rsync -r vim/vim/ ~/.vim/
 
 install -m 0640 tmux/tmux.conf ~/.tmux.conf
+install -m 0640 readline/inputrc ~/.inputrc
 
