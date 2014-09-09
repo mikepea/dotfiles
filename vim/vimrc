@@ -53,6 +53,16 @@ set autoindent
 let mapleader=","
 
 
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" vimcasts.org recommendations
+"
+" http://vimcasts.org/episodes/formatting-text-with-par/
+:set formatprg=par\ -w72re
+
+" http://vimcasts.org/episodes/how-to-fold/
+" :help fold-methods
+nnoremap <Space> za
+
 " strip trailing whitespace
 nnoremap <leader>W :%s/\s\+$//<cr>:let @/=''<CR>
 
