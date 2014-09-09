@@ -1,3 +1,8 @@
+if exists("g:did_load_filetypes")
+  filetype off
+  filetype plugin indent off
+endif
+
 " pathogen woo
 execute pathogen#infect()
 
@@ -42,4 +47,19 @@ set ts=2
 set sw=2
 set et
 set autoindent
+
+" User customisations. ',' is the 'leader char'
+" :help leader
+let mapleader=","
+
+
+" strip trailing whitespace
+nnoremap <leader>W :%s/\s\+$//<cr>:let @/=''<CR>
+
+" comment/uncomment out code to marker 'a' as #MP#
+nnoremap <leader># :'a,'bs/^/#MP#/<CR>
+nnoremap <leader>3 :'a,'bs/#MP#//<CR>
+
+" sensible vert-split hotkey
+nnoremap <leader>w <C-w>v<C-w>l
 
