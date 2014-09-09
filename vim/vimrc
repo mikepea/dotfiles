@@ -171,5 +171,8 @@ endif
 " Show trailing whitespace:
 :match ExtraWhitespace /\s\+$/
 
+" go fmt go files on write
+autocmd FileType go autocmd BufWritePre <buffer> Fmt
+
 filetype plugin indent on
 syntax on
