@@ -1,6 +1,7 @@
 
 install:
 	install -m 0640 bash/bash_profile ~/.bash_profile
+	install -m 0640 git/gitconfig ~/.gitconfig
 	install -m 0640 vim/vimrc ~/.vimrc
 	mkdir  -p ~/.vim
 	rsync -r vim/vim/ ~/.vim/

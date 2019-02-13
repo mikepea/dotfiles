@@ -1,5 +1,7 @@
 echo "Loading Profile"
 
+export VISUAL=vi
+
 # rbenv setup
 if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 
@@ -40,6 +42,7 @@ alias gb='git branch'
 alias gs='git status'
 alias gd='git diff'
 
+alias .p='source ~/.bash_profile'
 
 # golang
 export GOPATH="${HOME}/.gopath"
