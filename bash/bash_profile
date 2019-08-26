@@ -45,4 +45,6 @@ alias gd='git diff'
 alias .p='source ~/.bash_profile'
 
 # golang
-export GOPATH="${HOME}/.gopath"
+export GOPATH="${HOME}/go"
+
+export PATH=${PATH}:${GOPATH}/bin
