@@ -46,5 +46,16 @@ alias .p='source ~/.bash_profile'
 
 # golang
 export GOPATH="${HOME}/go"
+# needed for 'go get' of private repos
+export GOPRIVATE=github.com/hashicorp
 
 export PATH=${PATH}:${GOPATH}/bin
+
+# go-jira
+if which jira > /dev/null; then
+  eval "$(jira --completion-script-bash)"
+fi
+
+if -f /usr/local/bin/nomad; then
+  complete -C /usr/local/bin/nomad nomad
+fi

@@ -9,4 +9,10 @@ install:
 	install -m 0640 readline/inputrc ~/.inputrc
 	mkdir -p ~/bin
 
+diff:
+	diff -p ~/.bash_profile bash/bash_profile
+	diff -p ~/.gitconfig git/gitconfig
+	diff -p ~/.vimrc vim/vimrc 
+	diff -p ~/.tmux.conf tmux/tmux.conf 
+
 .PHONY: install
