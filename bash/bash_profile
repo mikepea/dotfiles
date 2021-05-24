@@ -56,6 +56,10 @@ if which jira > /dev/null; then
   eval "$(jira --completion-script-bash)"
 fi
 
-if -f /usr/local/bin/nomad; then
-  complete -C /usr/local/bin/nomad nomad
+if which nomad > /dev/null; then
+  complete -C $(which nomad) nomad
+fi
+
+if [ -f /home/linuxbrew/.linuxbrew/bin/brew ]; then
+  eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 fi
