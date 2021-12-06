@@ -139,7 +139,8 @@ set colorcolumn=100
 
 set list
 "set listchars=tab:▸\ ,eol:¬
-set listchars=tab:\ \ ,eol:¬
+"set listchars=tab:\ \ ,eol:¬
+set listchars=tab:\ \ 
 
 " strip trailing whitespace
 nnoremap <leader>W :%s/\s\+$//<cr>:let @/=''<CR>

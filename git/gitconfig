@@ -1,3 +1,9 @@
 [user]
 	email = Mike.Pountney@gmail.com
 	name = Mike Pountney
+[credential]
+	helper = osxkeychain
+[url "git@github.com:"]
+	insteadOf = https://github.com/
+[core]
+	editor = /usr/bin/vim
