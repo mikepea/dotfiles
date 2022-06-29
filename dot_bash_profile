@@ -1,0 +1,65 @@
+export VISUAL=vi
+
+# rbenv setup
+if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
+
+# virtualenv / hackercodex.com mavericks setup
+
+# Set architecture flags
+export ARCHFLAGS="-arch x86_64"
+
+# Ensure user-installed binaries take precedence
+export PATH=/usr/local/bin:/usr/local/sbin:${HOME}/bin:$PATH
+# Load .bashrc if it exists
+test -f ~/.bashrc && source ~/.bashrc
+
+#virtualenv wrapper (as per https://gist.github.com/munhitsu/1034876)
+if [ -r /usr/local/bin/virtualenvwrapper.sh ]; then
+  export WORKON_HOME=$HOME/.virtualenvs
+  source /usr/local/bin/virtualenvwrapper.sh
+  # virtualenv aliases
+  # http://blog.doughellmann.com/2010/01/virtualenvwrapper-tips-and-tricks.html
+  alias v='workon'
+  alias v.deactivate='deactivate'
+  alias v.mk='mkvirtualenv --no-site-packages'
+  alias v.mk_withsitepackages='mkvirtualenv'
+  alias v.rm='rmvirtualenv'
+  alias v.switch='workon'
+  alias v.add2virtualenv='add2virtualenv'
+  alias v.cdsitepackages='cdsitepackages'
+  alias v.cd='cdvirtualenv'
+  alias v.lssitepackages='lssitepackages'
+fi
+
+
+alias bx='bundle exec'
+alias gco='git checkout'
+alias gcob='git checkout -b'
+alias gcom='git checkout master'
+alias gb='git branch'
+alias gs='git status'
+alias gd='git diff'
+
+alias .p='source ~/.bash_profile'
+
+# golang
+export GOPATH="${HOME}/go"
+# needed for 'go get' of private repos
+export GOPRIVATE=github.com/hashicorp
+
+export PATH=${PATH}:${GOPATH}/bin
+
+# go-jira
+if which jira > /dev/null; then
+  eval "$(jira --completion-script-bash)"
+fi
+
+if which nomad > /dev/null; then
+  complete -C $(which nomad) nomad
+fi
+
+if [ -f /home/linuxbrew/.linuxbrew/bin/brew ]; then
+  eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+elif [ -f /opt/homebrew/bin/brew ]; then
+  eval "$(/opt/homebrew/bin/brew shellenv)"
+fi
