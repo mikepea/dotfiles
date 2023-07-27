@@ -1,11 +1,9 @@
 {
-  "copilot.vim": { "branch": "release", "commit": "1358e8e45ecedc53daf971924a0541ddf6224faf" },
-  "go.nvim": { "branch": "master", "commit": "a8095eb334495caec3099b717cc7f5b1fbc3e628" },
+  "go.nvim": { "branch": "master", "commit": "816fbe43b5dc15edcafa0b32785a4972fb34e67f" },
   "guihua.lua": { "branch": "master", "commit": "ab8b1f09603cc268770efd057115035dc6cfa83d" },
-  "lazy.nvim": { "branch": "main", "commit": "c1aad95243f0d180f41348be26b2417547fb168b" },
-  "neoconf.nvim": { "branch": "main", "commit": "9625a1710a9be427a662f9ba0a383164588a41a8" },
-  "neodev.nvim": { "branch": "main", "commit": "78f1c370173e7689bd58d64229b4d92c5dfb2793" },
+  "lazy.nvim": { "branch": "main", "commit": "3ad55ae678876516156cca2f361c51f7952a924b" },
   "nvim-lspconfig": { "branch": "master", "commit": "a51892484c2002c083a8b0a9dfcefb3a569be36d" },
   "nvim-treesitter": { "branch": "master", "commit": "19385830ab737f5c49a4cd44d0cdab5e5ee697d1" },
-  "which-key.nvim": { "branch": "main", "commit": "d871f2b664afd5aed3dc1d1573bef2fb24ce0484" }
+  "nvim-treesitter-textobjects": { "branch": "master", "commit": "9e519b6146512c8e2e702faf8ac48420f4f5deec" },
+  "vim": { "branch": "main", "commit": "5280d241fe6a4f4ddef17078a215b81a113388e8" }
 }
