@@ -3,7 +3,9 @@
 	name = Mike Pountney
 [credential]
 	helper = osxkeychain
-[url "git@github.com:"]
-	insteadOf = https://github.com/
 [core]
 	editor = /usr/bin/vim
+[init]
+	defaultBranch = main
+[url "https://github.com/"]
+	insteadOf = git@github.com:
