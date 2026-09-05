@@ -13,3 +13,6 @@
 # micro ships/downloads these; only settings.json is ours.
 .config/micro/syntax
 .config/micro/colorschemes
+
+# Repo docs, not a dotfile.
+README.md
