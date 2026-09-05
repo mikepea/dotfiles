@@ -1,0 +1,15 @@
+# Machine-local state and secrets — never manage these.
+.cache
+.claude.json
+.claude
+.config/elinks
+.config/autostart
+.config/fish/fish_variables
+.local/share/fish/fish_history
+.local/share/applications
+.viminfo
+.lesshst
+
+# micro ships/downloads these; only settings.json is ours.
+.config/micro/syntax
+.config/micro/colorschemes
