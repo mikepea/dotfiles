@@ -1,0 +1,25 @@
+# Readline config: bash, and anything else that links readline
+# (python REPL, psql, gdb, ...). Fish has its own vi mode, set in
+# ~/.config/fish/config.fish.
+
+# Ported from the old dotfiles repo, which had only this line.
+set editing-mode vi
+
+# Vi mode with no mode indicator is disorienting; show one, and give
+# normal mode a block cursor, insert mode a bar.
+set show-mode-in-prompt on
+set vi-ins-mode-string "\1\e[6 q\2"
+set vi-cmd-mode-string "\1\e[2 q\2"
+
+$if mode=vi
+    set keymap vi-insert
+    # The emacs keys worth keeping in insert mode. Inside tmux, ctrl-a is
+    # the prefix, so reach this one with the C-a a escape hatch.
+    "\C-a": beginning-of-line
+    "\C-e": end-of-line
+    "\C-r": reverse-search-history
+    "\C-l": clear-screen
+
+    set keymap vi-command
+    "\C-l": clear-screen
+$endif

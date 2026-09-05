@@ -1,7 +1,8 @@
 # Machine-local state and secrets — never manage these.
 .cache
 .claude.json
-.claude
+.claude/*
+!.claude/settings.json
 .config/elinks
 .config/autostart
 .config/fish/fish_variables
