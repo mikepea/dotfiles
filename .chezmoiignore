@@ -16,3 +16,6 @@
 
 # Repo docs, not a dotfile.
 README.md
+
+# tpm clones plugin repos here; managed by run_once_install-tpm.sh.
+.config/tmux/plugins
