@@ -1,9 +1,0 @@
-[user]
-	name = Mike Pountney
-	email = Mike.Pountney@gmail.com
-
-[init]
-	defaultBranch = main
-
-[push]
-	autoSetupRemote = true

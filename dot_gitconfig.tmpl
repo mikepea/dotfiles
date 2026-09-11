@@ -1,0 +1,23 @@
+[user]
+	name = Mike Pountney
+	email = Mike.Pountney@gmail.com
+
+[init]
+	defaultBranch = main
+
+[push]
+	autoSetupRemote = true
+{{ if lookPath "gh" }}
+# Wired up by 'gh auth setup-git'. The empty 'helper =' clears anything
+# inherited from system config, so gh is the only helper consulted for these
+# hosts. Deliberately unqualified where gh writes an absolute path: it is in
+# /usr/bin on this box but /opt/homebrew/bin, ~/.nix-profile/bin or
+# /usr/local/bin elsewhere. git runs a '!' helper through the shell, so PATH
+# resolves it. The block is omitted entirely on a machine without gh.
+[credential "https://github.com"]
+	helper =
+	helper = !gh auth git-credential
+[credential "https://gist.github.com"]
+	helper =
+	helper = !gh auth git-credential
+{{- end }}
