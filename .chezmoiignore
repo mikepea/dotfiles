@@ -20,3 +20,31 @@ README.md
 
 # tpm clones plugin repos here; managed by run_once_install-tpm.sh.
 .config/tmux/plugins
+
+# Openbox writes timestamped backups next to the live files.
+.config/openbox/*.bak
+.config/openbox/*.bak-*
+.config/openbox/*.orig
+.config/openbox/*.pre-*
+
+# Regenerated from obmenu-generator/schema.pl on every run; schema.pl is ours.
+.config/openbox/menu.xml
+.config/obmenu-generator/*.orig
+
+# Credentials and machine-local state.
+.config/gh
+.config/chezmoi
+.config/go
+.config/mozilla
+.config/yay
+
+# App-written, currently all defaults - nothing of ours to keep.
+.config/btop
+.config/ghostty
+
+# Distro-specific symlink into /usr/share; autostart falls back without it.
+.config/openbox/wallpaper
+
+# Empty directories other packages created.
+.config/menus
+.config/procps
