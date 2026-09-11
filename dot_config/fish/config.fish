@@ -35,3 +35,14 @@ set -g fish_cursor_visual      block
 # conf.d, so re-apply them here. bind is idempotent, so the double call
 # fish may still make is harmless.
 fish_user_key_bindings
+
+if test -z $ASDF_DATA_DIR
+	set _asdf_shims "$HOME/.asdf/shims"
+else
+	set _asdf_shims "$ASDF_DATA_DIR/shims"
+end
+
+if not contains $_asdf_shims $PATH
+	set -gx --prepend PATH $_asdf_shims
+end
+set --erase _asdf_shims
