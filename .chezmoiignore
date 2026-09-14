@@ -48,3 +48,32 @@ README.md
 # Empty directories other packages created.
 .config/menus
 .config/procps
+
+# Neovim's own state: swap, undo, shada, lazy/mason downloads. Only
+# .config/nvim/init.lua is ours.
+.local/share/nvim
+.local/state/nvim
+
+{{ if ne .chezmoi.os "linux" }}
+# ---------------------------------------------------------------------------
+# Linux-only. This repo grew up on a CachyOS box; the desktop session and the
+# Arch-flavoured bash config are meaningless (or actively wrong) elsewhere.
+# ---------------------------------------------------------------------------
+
+# Openbox window manager, its panel and its menu generator.
+.config/openbox
+.config/obmenu-generator
+.config/tint2
+
+# XDG desktop file associations; macOS uses LaunchServices.
+.config/mimeapps.list
+
+# The fish config sources /usr/share/cachyos-fish-config/cachyos-config.fish,
+# which only exists on that distro. fish itself is portable; this config is not.
+.config/fish
+
+# Arch's default .bashrc: 'ls --color=auto' is a GNU flag that BSD ls
+# rejects. The macOS .bash_profile sources ~/.bashrc only if it exists,
+# so leaving it unmanaged here is safe.
+.bashrc
+{{ end }}

@@ -7,6 +7,23 @@
 
 [push]
 	autoSetupRemote = true
+{{ if eq .chezmoi.os "darwin" }}
+# macOS only, carried over from the pre-chezmoi ~/.gitconfig on that machine.
+# This block must come *before* the per-host credential blocks below. Those
+# reset the helper list for github with an empty 'helper =', so a global
+# helper declared after them would simply be appended back on, defeating the
+# reset. Declared here, it applies to every other host and not to github.
+[core]
+	editor = /usr/bin/vim
+
+[credential]
+	helper = osxkeychain
+
+# Rewrite SSH remotes to HTTPS so the gh credential helper below is what
+# authenticates, rather than needing an SSH key on this machine.
+[url "https://github.com/"]
+	insteadOf = git@github.com:
+{{- end }}
 {{ if lookPath "gh" }}
 # Wired up by 'gh auth setup-git'. The empty 'helper =' clears anything
 # inherited from system config, so gh is the only helper consulted for these

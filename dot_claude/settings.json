@@ -1,4 +1,7 @@
 {
   "theme": "dark",
-  "editorMode": "vim"
+  "editorMode": "vim",
+  "enabledPlugins": {
+    "gopls-lsp@claude-plugins-official": true
+  }
 }
