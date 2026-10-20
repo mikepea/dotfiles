@@ -1,0 +1,20 @@
+#!/bin/bash
+# Steam Big Picture under gamescope, straight from a tty -- no WM needed.
+# The HDMI port is wired to the NVIDIA GPU, so when a TV is attached use that
+# GPU and output; otherwise run on the laptop panel (Intel).
+set -euo pipefail
+
+if pgrep -x steam >/dev/null; then
+  echo "Steam is already running; quit it first." >&2
+  exit 1
+fi
+
+args=(-e -f)
+if [[ $(cat /sys/class/drm/card*-HDMI-A-1/status 2>/dev/null) == connected ]]; then
+  args+=(--prefer-vk-device 10de:28a0 -O HDMI-A-1)
+fi
+
+log=${XDG_STATE_HOME:-$HOME/.local/state}/bigpicture.log
+mkdir -p "${log%/*}"
+echo "gamescope ${args[*]}" >"$log"
+exec gamescope "${args[@]}" -- steam -gamepadui "$@" >>"$log" 2>&1
