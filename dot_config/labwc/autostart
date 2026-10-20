@@ -1,0 +1,33 @@
+#!/bin/sh
+#
+# labwc per-user autostart, ported from ~/.config/openbox/autostart.
+# Runs once at session start. Not re-run by `labwc -r`.
+
+# Screen layout. kanshi applies ~/.config/kanshi/config now and again on every
+# hotplug, so there is no xrandr step.
+kanshi >/dev/null 2>&1 &
+
+# Wallpaper (swaybg replaces feh/xsetroot)
+if [ -f "$HOME/.config/openbox/wallpaper" ]; then
+  swaybg -m fill -i "$HOME/.config/openbox/wallpaper" >/dev/null 2>&1 &
+else
+  swaybg -c '#1d2021' >/dev/null 2>&1 &
+fi
+
+# Polkit agent
+for agent in /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 \
+             /usr/lib/mate-polkit/polkit-mate-authentication-agent-1 \
+             /usr/lib/polkit-kde-authentication-agent-1; do
+  if [ -x "$agent" ]; then
+    "$agent" &
+    break
+  fi
+done
+
+# Notifications. dunst supports Wayland natively.
+if command -v dunst >/dev/null 2>&1; then
+  dunst &
+fi
+
+# No panel yet: tint2 is X11-only. Alt-Tab and right-click > client list
+# cover window switching until you pick one (waybar or sfwbar).

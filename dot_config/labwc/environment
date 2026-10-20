@@ -1,0 +1,12 @@
+# labwc session environment. Plain KEY=value lines, read at startup.
+# Replaces setxkbmap from the Openbox autostart: CapsLock is a second Ctrl.
+XKB_DEFAULT_LAYOUT=us
+XKB_DEFAULT_MODEL=pc105
+XKB_DEFAULT_OPTIONS=ctrl:nocaps
+
+# Firefox: use the native Wayland backend rather than XWayland.
+MOZ_ENABLE_WAYLAND=1
+
+# If the mouse cursor vanishes or glitches on the TV (it is driven by the
+# NVIDIA GPU), uncomment this.
+# WLR_NO_HARDWARE_CURSORS=1

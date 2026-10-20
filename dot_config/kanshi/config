@@ -1,0 +1,35 @@
+# kanshi screen layouts. The first profile whose outputs all match the
+# connected set wins; it is re-evaluated on every hotplug.
+#
+#   wlr-randr              list outputs, modes and names
+#   kanshictl reload       re-read this file
+#   kanshictl switch NAME  force a profile, e.g. tv-native for gaming
+#
+# eDP-1 is the laptop panel (Intel GPU). HDMI-A-1 is the HDMI port, wired to
+# the NVIDIA GPU; under Wayland the compositor drives both, nothing to bind.
+
+profile laptop {
+  output eDP-1 enable mode 1920x1080@144Hz position 0,0 scale 1
+}
+
+# LG TV at 4K. Scale 2 makes it 1920x1080 logical pixels, so UI is the same
+# size as on the laptop and the two line up edge to edge.
+profile tv {
+  output eDP-1 enable mode 1920x1080@144Hz position 0,0 scale 1
+  output HDMI-A-1 enable mode 3840x2160@60Hz position 1920,0 scale 2
+}
+
+# Same TV, unscaled. XWayland apps (most Steam games) render at the logical
+# size and get upscaled, so at scale 2 games are effectively 1080p. Switch to
+# this with `kanshictl switch tv-native` to give them the full 4K. Never
+# picked automatically because `tv` above matches first.
+profile tv-native {
+  output eDP-1 enable mode 1920x1080@144Hz position 0,0 scale 1
+  output HDMI-A-1 enable mode 3840x2160@60Hz position 1920,0 scale 1
+}
+
+# Any other external screen on any port: preferred mode, right of the laptop.
+profile external {
+  output eDP-1 enable mode 1920x1080@144Hz position 0,0 scale 1
+  output * enable position 1920,0
+}

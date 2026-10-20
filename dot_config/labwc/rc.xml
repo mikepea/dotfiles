@@ -1,0 +1,101 @@
+<?xml version="1.0"?>
+<!--
+  labwc config, ported from ~/.config/openbox/rc.xml.
+  Reload with `labwc -r` (or log out and back in).
+  Reference: /usr/share/doc/labwc/rc.xml.all, labwc-config(5), labwc-actions(5)
+-->
+<labwc_config>
+
+  <theme>
+    <!-- Openbox themes work as-is: labwc reads <theme>/openbox-3/themerc -->
+    <name>Clearlooks</name>
+    <font><name>sans</name><size>10</size></font>
+  </theme>
+
+  <desktops number="4" />
+
+  <keyboard>
+    <!-- labwc's defaults: Alt-Tab, Alt-F4, W-a maximise, W-d show desktop,
+         W-arrows snap to edge, Alt-Space client menu, media keys. Anything
+         below with the same key overrides the default. -->
+    <default />
+
+    <!-- Volume / mic (wpctl, as in Openbox; defaults use pactl) -->
+    <keybind key="XF86AudioMute">
+      <action name="Execute" command="wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle" />
+    </keybind>
+    <keybind key="XF86AudioLowerVolume">
+      <action name="Execute" command="wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-" />
+    </keybind>
+    <keybind key="XF86AudioRaiseVolume">
+      <action name="Execute" command="wpctl set-volume -l 1.0 @DEFAULT_AUDIO_SINK@ 5%+" />
+    </keybind>
+    <keybind key="XF86AudioMicMute">
+      <action name="Execute" command="wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle" />
+    </keybind>
+
+    <!-- Brightness -->
+    <keybind key="XF86MonBrightnessUp">
+      <action name="Execute" command="brightnessctl -q set 5%+" />
+    </keybind>
+    <keybind key="XF86MonBrightnessDown">
+      <action name="Execute" command="brightnessctl -q -n 1000 set 5%-" />
+    </keybind>
+
+    <!-- Airplane mode (toggles wifi + bluetooth together) -->
+    <keybind key="XF86RFKill">
+      <action name="Execute" command="sh -c 'rfkill list | grep -q &quot;Soft blocked: yes&quot; &amp;&amp; rfkill unblock all || rfkill block all'" />
+    </keybind>
+
+    <!-- Desktops. labwc desktops are a row, so only left/right (Openbox's
+         C-A-Up/Down have no equivalent). -->
+    <keybind key="C-A-Left">
+      <action name="GoToDesktop" to="left" wrap="no" />
+    </keybind>
+    <keybind key="C-A-Right">
+      <action name="GoToDesktop" to="right" wrap="no" />
+    </keybind>
+    <keybind key="S-A-Left">
+      <action name="SendToDesktop" to="left" wrap="no" />
+    </keybind>
+    <keybind key="S-A-Right">
+      <action name="SendToDesktop" to="right" wrap="no" />
+    </keybind>
+    <keybind key="W-F1"><action name="GoToDesktop" to="1" /></keybind>
+    <keybind key="W-F2"><action name="GoToDesktop" to="2" /></keybind>
+    <keybind key="W-F3"><action name="GoToDesktop" to="3" /></keybind>
+    <keybind key="W-F4"><action name="GoToDesktop" to="4" /></keybind>
+
+    <!-- New for two screens: throw the focused window to the other output -->
+    <keybind key="W-S-Left">
+      <action name="MoveToOutput" direction="left" wrap="yes" />
+    </keybind>
+    <keybind key="W-S-Right">
+      <action name="MoveToOutput" direction="right" wrap="yes" />
+    </keybind>
+
+    <!-- Apps -->
+    <keybind key="W-Return">
+      <action name="Execute" command="alacritty" />
+    </keybind>
+    <keybind key="C-A-t">
+      <action name="Execute" command="alacritty" />
+    </keybind>
+    <!-- rofi 2.x runs natively on Wayland -->
+    <keybind key="W-r">
+      <action name="Execute" command="rofi -show drun" />
+    </keybind>
+
+    <!-- Log out (back to the tty1 shell) -->
+    <keybind key="W-S-e">
+      <action name="If">
+        <prompt message="Exit labwc?" />
+        <then><action name="Exit" /></then>
+      </action>
+    </keybind>
+  </keyboard>
+
+  <!-- No <mouse> section: labwc's defaults match Openbox's (right-click
+       desktop for root-menu, Alt-drag to move, etc). -->
+
+</labwc_config>

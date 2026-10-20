@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openbox_menu xmlns="https://openbox.org/"
+ xmlns:xsi="https://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="https://openbox.org/">
+  <menu id="root-menu" label="Applications">
+    <item label="Terminal"><action name="Execute"><command><![CDATA[alacritty]]></command></action></item>
+    <item label="Web Browser"><action name="Execute"><command><![CDATA[firefox]]></command></action></item>
+    <item label="Run command"><action name="Execute"><command><![CDATA[rofi -show drun]]></command></action></item>
+  <separator label="Games"/>
+    <item label="Steam"><action name="Execute"><command><![CDATA[steam]]></command></action></item>
+    <item label="Steam (Big Picture)"><action name="Execute"><command><![CDATA[steam -bigpicture]]></command></action></item>
+    <item label="Steam (Big Picture in gamescope)"><action name="Execute"><command><![CDATA[gamescope -f -e -- steam -bigpicture -tenfoot]]></command></action></item>
+  <separator label="Categories"/>
+  <menu id="0.62611926144837" label="Accessories">
+    <item label="Limine-snapper-restore"><action name="Execute"><command><![CDATA[limine-snapper-restore]]></command></action></item>
+    <item label="Micro"><action name="Execute"><command><![CDATA[alacritty -e 'micro']]></command></action></item>
+    <item label="Shelly"><action name="Execute"><command><![CDATA[/usr/bin/shelly-ui]]></command></action></item>
+    <item label="Vim"><action name="Execute"><command><![CDATA[alacritty -e 'vim']]></command></action></item>
+  </menu>
+  <menu id="0.00364456334816055" label="Development">
+    <item label="Meld"><action name="Execute"><command><![CDATA[meld]]></command></action></item>
+    <item label="Micro"><action name="Execute"><command><![CDATA[alacritty -e 'micro']]></command></action></item>
+  </menu>
+  <menu id="0.64328797351676" label="Games">
+    <item label="Steam"><action name="Execute"><command><![CDATA[/usr/bin/steam]]></command></action></item>
+  </menu>
+  <menu id="0.186733713696363" label="Multimedia">
+    <item label="Qt V4L2 test Utility"><action name="Execute"><command><![CDATA[qv4l2]]></command></action></item>
+    <item label="Qt V4L2 video capture utility"><action name="Execute"><command><![CDATA[qvidcap]]></command></action></item>
+    <item label="Volume Control"><action name="Execute"><command><![CDATA[pavucontrol]]></command></action></item>
+  </menu>
+  <menu id="0.918372723402246" label="Network">
+    <item label="Avahi SSH Server Browser"><action name="Execute"><command><![CDATA[/usr/bin/bssh]]></command></action></item>
+    <item label="Avahi VNC Server Browser"><action name="Execute"><command><![CDATA[/usr/bin/bvnc]]></command></action></item>
+    <item label="Firefox"><action name="Execute"><command><![CDATA[/usr/lib/firefox/firefox]]></command></action></item>
+    <item label="Links"><action name="Execute"><command><![CDATA[xlinks -g]]></command></action></item>
+    <item label="Steam"><action name="Execute"><command><![CDATA[/usr/bin/steam]]></command></action></item>
+  </menu>
+  <menu id="0.581257638739757" label="Other">
+    <item label="Rofi Theme Selector"><action name="Execute"><command><![CDATA[rofi-theme-selector]]></command></action></item>
+    <item label="Rofi"><action name="Execute"><command><![CDATA[rofi -show]]></command></action></item>
+  </menu>
+  <menu id="0.845269692732781" label="Settings">
+    <item label="Customize Look and Feel"><action name="Execute"><command><![CDATA[lxappearance]]></command></action></item>
+    <item label="NVIDIA X Server Settings"><action name="Execute"><command><![CDATA[/usr/bin/nvidia-settings]]></command></action></item>
+    <item label="Openbox Settings"><action name="Execute"><command><![CDATA[obconf-qt]]></command></action></item>
+    <item label="Tint2 Settings"><action name="Execute"><command><![CDATA[tint2conf]]></command></action></item>
+    <item label="Volume Control"><action name="Execute"><command><![CDATA[pavucontrol]]></command></action></item>
+  </menu>
+  <menu id="0.209196359891472" label="System">
+    <item label="Alacritty"><action name="Execute"><command><![CDATA[alacritty]]></command></action></item>
+    <item label="Avahi Zeroconf Browser"><action name="Execute"><command><![CDATA[/usr/bin/avahi-discover]]></command></action></item>
+    <item label="btop++"><action name="Execute"><command><![CDATA[alacritty -e 'btop']]></command></action></item>
+    <item label="Btrfs Assistant"><action name="Execute"><command><![CDATA[btrfs-assistant-launcher]]></command></action></item>
+    <item label="CachyOS Hello"><action name="Execute"><command><![CDATA[/usr/bin/cachyos-hello]]></command></action></item>
+    <item label="CachyOS Kernel Manager"><action name="Execute"><command><![CDATA[cachyos-kernel-manager]]></command></action></item>
+    <item label="CachyOS Package Installer"><action name="Execute"><command><![CDATA[/usr/bin/cachyos-pi]]></command></action></item>
+    <item label="Hardware Locality lstopo"><action name="Execute"><command><![CDATA[lstopo]]></command></action></item>
+    <item label="SchedExt GUI Manager"><action name="Execute"><command><![CDATA[scx-manager]]></command></action></item>
+    <item label="Shelly"><action name="Execute"><command><![CDATA[/usr/bin/shelly-ui]]></command></action></item>
+    <item label="Tint2"><action name="Execute"><command><![CDATA[tint2]]></command></action></item>
+    <item label="UXTerm"><action name="Execute"><command><![CDATA[uxterm]]></command></action></item>
+    <item label="XTerm"><action name="Execute"><command><![CDATA[xterm]]></command></action></item>
+  </menu>
+  <separator/>
+  <menu id="0.449610773698087" label="Advanced Settings">
+    <item label="Tint2 Panel"><action name="Execute"><command><![CDATA[alacritty -e micro ~/.config/tint2/tint2rc]]></command></action></item>
+  <menu id="0.845288777549968" label="Obmenu-Generator">
+    <item label="Menu Schema"><action name="Execute"><command><![CDATA[alacritty -e micro ~/.config/obmenu-generator/schema.pl]]></command></action></item>
+    <item label="Menu Config"><action name="Execute"><command><![CDATA[alacritty -e micro ~/.config/obmenu-generator/config.pl]]></command></action></item>
+  <separator/>
+    <item label="Generate a static menu"><action name="Execute"><command><![CDATA[obmenu-generator -s -c]]></command></action></item>
+    <item label="Generate a static menu with icons"><action name="Execute"><command><![CDATA[obmenu-generator -s -i -c]]></command></action></item>
+  <separator/>
+    <item label="Generate a dynamic menu"><action name="Execute"><command><![CDATA[obmenu-generator -p]]></command></action></item>
+    <item label="Generate a dynamic menu with icons"><action name="Execute"><command><![CDATA[obmenu-generator -p -i]]></command></action></item>
+  <separator/>
+    <item label="Refresh cache"><action name="Execute"><command><![CDATA[obmenu-generator -d]]></command></action></item>
+  </menu>
+  <menu id="0.040818759023562" label="Openbox">
+    <item label="Openbox Autostart"><action name="Execute"><command><![CDATA[alacritty -e micro ~/.config/openbox/autostart]]></command></action></item>
+    <item label="Openbox RC"><action name="Execute"><command><![CDATA[alacritty -e micro ~/.config/openbox/rc.xml]]></command></action></item>
+    <item label="Openbox Menu"><action name="Execute"><command><![CDATA[alacritty -e micro ~/.config/openbox/menu.xml]]></command></action></item>
+    <item label="Reconfigure Openbox"><action name="Execute"><command><![CDATA[openbox --reconfigure]]></command></action></item>
+  </menu>
+  </menu>
+  <separator/>
+    <item label="Exit"><action name="Exit"/></item>
+  </menu>
+</openbox_menu>
