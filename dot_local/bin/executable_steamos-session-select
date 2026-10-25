@@ -1,0 +1,6 @@
+#!/bin/bash
+# Steam's gamepad UI runs this for "Exit to desktop" (it's a SteamOS helper
+# that doesn't exist here, so the menu item just hangs). We have no session
+# to switch to: shut Steam down, gamescope (-e) follows, and bigpicture
+# drops back to the tty.
+exec steam -shutdown

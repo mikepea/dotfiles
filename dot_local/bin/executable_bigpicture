@@ -4,6 +4,9 @@
 # GPU and output; otherwise run on the laptop panel (Intel).
 set -euo pipefail
 
+# steamos-session-select (for "Exit to desktop") lives alongside this script.
+export PATH="$HOME/.local/bin:$PATH"
+
 if pgrep -x steam >/dev/null; then
   echo "Steam is already running; quit it first." >&2
   exit 1
