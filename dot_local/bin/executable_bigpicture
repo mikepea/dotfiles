@@ -4,7 +4,8 @@
 # GPU and output; otherwise run on the laptop panel (Intel).
 set -euo pipefail
 
-# steamos-session-select (for "Exit to desktop") lives alongside this script.
+# -steamos3 makes "Switch to Desktop" run steamos-session-select, which lives
+# alongside this script and shuts Steam down.
 export PATH="$HOME/.local/bin:$PATH"
 
 if pgrep -x steam >/dev/null; then
@@ -20,4 +21,4 @@ fi
 log=${XDG_STATE_HOME:-$HOME/.local/state}/bigpicture.log
 mkdir -p "${log%/*}"
 echo "gamescope ${args[*]}" >"$log"
-exec gamescope "${args[@]}" -- steam -gamepadui "$@" >>"$log" 2>&1
+exec gamescope "${args[@]}" -- steam -gamepadui -steamos3 "$@" >>"$log" 2>&1

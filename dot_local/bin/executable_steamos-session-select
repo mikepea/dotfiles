@@ -3,4 +3,6 @@
 # that doesn't exist here, so the menu item just hangs). We have no session
 # to switch to: shut Steam down, gamescope (-e) follows, and bigpicture
 # drops back to the tty.
-exec steam -shutdown
+log=${XDG_STATE_HOME:-$HOME/.local/state}/bigpicture.log
+echo "steamos-session-select $* ($(date -Is))" >>"$log"
+exec steam -shutdown >>"$log" 2>&1
