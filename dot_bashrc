@@ -2,6 +2,24 @@
 # ~/.bashrc
 #
 
+# Where `go install` puts binaries: $GOBIN, else $GOPATH/bin, else ~/go/bin.
+# Set above the interactive guard so scripts see it too.
+_gobin="${GOBIN:-${GOPATH:-$HOME/go}/bin}"
+case ":$PATH:" in
+  *":$_gobin:"*) ;;
+  *) PATH="$PATH:$_gobin" ;;
+esac
+unset _gobin
+
+# asdf (itself installed by `go install` into the dir above) runs tools through
+# shims, which must come before the system copies.
+_asdf_shims="${ASDF_DATA_DIR:-$HOME/.asdf}/shims"
+case ":$PATH:" in
+  *":$_asdf_shims:"*) ;;
+  *) PATH="$_asdf_shims:$PATH" ;;
+esac
+unset _asdf_shims
+
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 

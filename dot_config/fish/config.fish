@@ -46,3 +46,14 @@ if not contains $_asdf_shims $PATH
 	set -gx --prepend PATH $_asdf_shims
 end
 set --erase _asdf_shims
+
+# Where `go install` puts binaries: $GOBIN, else $GOPATH/bin, else ~/go/bin.
+# -P edits $PATH directly (fish_user_paths always sorts to the front), -a
+# appends. A no-op if the directory is already on PATH or does not exist.
+if set -q GOBIN
+	fish_add_path -g -P -a $GOBIN
+else if set -q GOPATH
+	fish_add_path -g -P -a $GOPATH/bin
+else
+	fish_add_path -g -P -a $HOME/go/bin
+end

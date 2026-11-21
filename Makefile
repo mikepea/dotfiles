@@ -17,10 +17,14 @@
 
 SHELL := /bin/sh
 
+# Each step needs the one before it (packages, then asdf via go, then apply),
+# so never run them side by side, even under `make -j`.
+.NOTPARALLEL:
+
 # Tools installed part-way through a run (Homebrew, chezmoi and nvim in
-# ~/.local/bin) aren't on the caller's PATH yet, so put them there for every
-# recipe.
-export PATH := $(HOME)/.local/bin:/opt/homebrew/bin:/usr/local/bin:$(PATH)
+# ~/.local/bin, asdf in ~/go/bin) aren't on the caller's PATH yet, so put them
+# there for every recipe.
+export PATH := $(HOME)/.local/bin:$(HOME)/go/bin:/opt/homebrew/bin:/usr/local/bin:$(PATH)
 
 # --------------------------------------------------------------- detect OS --
 UNAME_S := $(shell uname -s)
@@ -48,10 +52,16 @@ endif
 # What the dotfiles expect to find: chezmoi to apply them, git and tmux for
 # the tpm bootstrap script, gh so dot_gitconfig.tmpl wires up its credential
 # helper (it checks lookPath "gh" at apply time, so gh must come first).
-ARCH_PKGS   := chezmoi git tmux neovim fish zsh micro github-cli \
+ARCH_PKGS   := chezmoi git tmux neovim fish zsh micro github-cli go \
                cachyos-fish-config cachyos-zsh-config
-UBUNTU_PKGS := git tmux fish zsh micro gh curl ca-certificates
-BREW_PKGS   := chezmoi git tmux neovim fish micro gh
+UBUNTU_PKGS := git tmux fish zsh micro gh golang-go curl ca-certificates
+BREW_PKGS   := chezmoi git tmux neovim fish micro gh go
+
+# asdf is built with `go install`, so it lands where go puts binaries ($GOBIN,
+# else $GOPATH/bin, else ~/go/bin), which the shell configs put on PATH. This
+# release needs Go >= 1.26.3; GOTOOLCHAIN=auto lets an older go (Ubuntu's apt
+# one, which must still be >= 1.21) download that toolchain itself.
+ASDF_VERSION := v0.20.2
 
 # Opt-in desktop session for `make desktop` (Arch only): labwc + kanshi, the
 # older openbox + tint2 session, and gamescope/steam for ~/.local/bin/bigpicture.
@@ -64,13 +74,14 @@ CHEZMOI_CONFIG := $(HOME)/.config/chezmoi/chezmoi.toml
 
 .PHONY: help all install init apply diff doctor desktop check-os \
         install-arch install-ubuntu install-macos \
-        ubuntu-chezmoi ubuntu-neovim homebrew oh-my-zsh
+        ubuntu-chezmoi ubuntu-neovim homebrew oh-my-zsh asdf
 
 help:
 	@echo "Detected OS: $(OS)"
 	@echo
 	@echo "  make all      install, init, then apply (fresh machine)"
 	@echo "  make install  install chezmoi and the tools the dotfiles use"
+	@echo "  make asdf     go install asdf $(ASDF_VERSION) (part of install)"
 	@echo "  make init     point chezmoi at this checkout ($(CURDIR))"
 	@echo "  make diff     show what apply would change in \$$HOME"
 	@echo "  make apply    write the dotfiles into \$$HOME"
@@ -85,7 +96,11 @@ check-os:
 	  exit 1; \
 	fi
 
-install: check-os install-$(OS)
+install: check-os install-$(OS) asdf
+
+asdf:
+	GOTOOLCHAIN=auto go install github.com/asdf-vm/asdf/cmd/asdf@$(ASDF_VERSION)
+	@echo "asdf: $$(command -v asdf) ($$(asdf --version))"
 
 # -------------------------------------------------------------------- Arch --
 install-arch:
@@ -185,9 +200,9 @@ apply:
 
 doctor:
 	@echo "OS: $(OS)"
-	@for t in chezmoi git tmux nvim fish zsh micro gh; do \
+	@for t in chezmoi git tmux nvim fish zsh micro gh go asdf; do \
 	  if command -v $$t >/dev/null 2>&1; then \
-	    case $$t in tmux) v=-V ;; *) v=--version ;; esac; \
+	    case $$t in tmux) v=-V ;; go) v=version ;; *) v=--version ;; esac; \
 	    printf '  %-8s %s\n' "$$t" "$$($$t $$v 2>&1 | head -n 1)"; \
 	  else \
 	    printf '  %-8s MISSING\n' "$$t"; \

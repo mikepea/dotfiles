@@ -120,4 +120,15 @@ autoload -Uz compinit && compinit
 alias k=kubectl
 {{ else -}}
 source /usr/share/cachyos-zsh-config/cachyos-config.zsh
-{{ end -}}
+{{ end }}
+# Where `go install` puts binaries: $GOBIN, else $GOPATH/bin, else ~/go/bin.
+_gobin="${GOBIN:-${GOPATH:-$HOME/go}/bin}"
+(( ${path[(Ie)$_gobin]} )) || path+=("$_gobin")
+unset _gobin
+
+# asdf (itself installed by `go install` into the dir above) runs tools through
+# shims, which must come before the system copies. The darwin branch above
+# already does this; the duplicate check makes it a no-op there.
+_asdf_shims="${ASDF_DATA_DIR:-$HOME/.asdf}/shims"
+(( ${path[(Ie)$_asdf_shims]} )) || path=("$_asdf_shims" $path)
+unset _asdf_shims
