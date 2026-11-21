@@ -23,4 +23,9 @@ CachyOS/Arch, Ubuntu and macOS. First get `make` and `git`
     chezmoi re-add            # pull in edits made directly in $HOME
     chezmoi cd                # shell into the source repo, then git push
 
+CLI tools such as kubectl and talosctl are pinned in `dot_tool-versions`
+(`~/.tool-versions`) and installed by asdf. To bump one, edit the version
+there and `chezmoi apply`: `run_onchange_after_asdf-install.sh.tmpl` re-runs
+whenever that file changes, adding any missing plugin and installing.
+
 See `.chezmoiignore` for what is deliberately not tracked.

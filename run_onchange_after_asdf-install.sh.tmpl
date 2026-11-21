@@ -1,0 +1,29 @@
+#!/bin/sh
+# Install the tools pinned in ~/.tool-versions with asdf, adding any plugin
+# they need first. "after" so ~/.tool-versions is already written; "onchange"
+# so chezmoi re-runs this whenever that file changes (bump a version, apply).
+#
+# dot_tool-versions hash: {{ include "dot_tool-versions" | sha256sum }}
+set -eu
+
+# asdf comes from `go install` (see the Makefile), which may not be on PATH
+# yet if the shell configs from this same apply haven't been loaded.
+PATH="${GOBIN:-${GOPATH:-$HOME/go}/bin}:$PATH"
+
+if ! command -v asdf >/dev/null 2>&1; then
+	echo "asdf: not found, skipping tool installs (run 'make asdf', then 'chezmoi apply')" >&2
+	exit 0
+fi
+
+cd "$HOME"
+
+# Plugin names come from the registry, e.g. talosctl -> bjw-s/asdf-talosctl.
+installed=$(asdf plugin list 2>/dev/null || true)
+for plugin in $(awk '!/^[[:space:]]*(#|$)/ { print $1 }' .tool-versions); do
+	if ! printf '%s\n' "$installed" | grep -qx "$plugin"; then
+		echo "asdf: adding plugin $plugin"
+		asdf plugin add "$plugin"
+	fi
+done
+
+asdf install
