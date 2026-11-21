@@ -4,8 +4,15 @@ Managed with [chezmoi](https://chezmoi.io).
 
 ## New machine
 
-    sudo pacman -S chezmoi          # or: sh -c "$(curl -fsLS get.chezmoi.io)"
-    chezmoi init --apply <this-repo-url>
+CachyOS/Arch, Ubuntu and macOS. First get `make` and `git`
+(Ubuntu: `sudo apt install -y make git`; macOS: `xcode-select --install`), then:
+
+    git clone https://github.com/mikepea/dotfiles.git ~/git/mikepea/dotfiles
+    cd ~/git/mikepea/dotfiles
+    make all        # install tools, point chezmoi at this checkout, apply
+
+`make` on its own lists the individual steps (`install`, `init`, `diff`,
+`apply`, `doctor`, and the opt-in Arch-only `desktop`).
 
 ## Daily use
 

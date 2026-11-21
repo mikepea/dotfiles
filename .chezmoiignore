@@ -15,8 +15,9 @@
 .config/micro/syntax
 .config/micro/colorschemes
 
-# Repo docs, not a dotfile.
+# Repo docs and tooling, not dotfiles.
 README.md
+Makefile
 
 # tpm clones plugin repos here; managed by run_once_install-tpm.sh.
 .config/tmux/plugins
